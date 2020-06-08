@@ -1,0 +1,8 @@
+venv/
+sessions/
+cache/
+*.bak
+*.pyc
+.idea
+errors
+databases/sql.log
