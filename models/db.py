@@ -91,6 +91,7 @@ auth = Auth(db, host_names=configuration.get('host.names'))
 # -------------------------------------------------------------------------
 # create all tables needed by auth, maybe add a list of extra fields
 # -------------------------------------------------------------------------
+auth.settings.create_user_groups = False
 auth.settings.extra_fields['auth_user'] = []
 auth.define_tables(username=False, signature=False)
 
