@@ -29,7 +29,7 @@ def view():
                 db.reply.insert(
                     author=auth.user_id,
                     rant_id=rant_id,
-                    description=form.vars.description,
+                    description=reply_form.vars.description,
                     posted_at=datetime.datetime.now()
                 )
                 session.flash = 'Comment added!'
