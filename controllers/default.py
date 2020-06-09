@@ -2,6 +2,7 @@ def index():
     response.flash = T("Hello World")
     return dict(message=T('Welcome to web2py!'))
 
+
 # ---- Action for login/register/etc (required for auth) -----
 def user():
     """
@@ -20,3 +21,7 @@ def user():
     also notice there is http://..../[app]/appadmin/manage/auth to allow administrator to manage users
     """
     return dict(form=auth())
+
+
+def download():
+    return response.download(request, db)

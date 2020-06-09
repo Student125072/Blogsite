@@ -37,6 +37,10 @@ def view():
 
         this_rant = db(db.rant.id == rant_id).select().first()
         rant_comments = db(db.reply.rant_id == rant_id).select()
-        return dict(rant=this_rant, comments=[comment for comment in rant_comments if rant_comments], reply_form=reply_form)
+        return dict(rant=this_rant, comments=[comment for comment in rant_comments if rant_comments],
+                    reply_form=reply_form)
     else:
         raise HTTP(404)
+
+
+
