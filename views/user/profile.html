@@ -188,6 +188,7 @@
     </div>
     {{else:}}
     {{=edit_profile}}
+    <a class="btn profile-edit-btn" href="{{=URL('user', 'profile', vars={'username': user.username})}}">Don't save changes</a>
     {{pass}}
   </form>
 </div>
