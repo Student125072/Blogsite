@@ -22,6 +22,8 @@ def create():
 def view():
     if request.vars['id']:
         rant_id = request.vars['id']
+        this_rant = db(db.rant.id == rant_id).select().first()
+        rant_comments = db(db.reply.rant_id == rant_id).select()
 
         if auth.user:
             reply_form = SQLFORM.factory(db.reply)
@@ -34,13 +36,9 @@ def view():
                 )
                 session.flash = 'Comment added!'
                 redirect(URL(f='view', vars={'id': rant_id}))
+            return dict(rant=this_rant, comments=[comment for comment in rant_comments if rant_comments],
+                        reply=reply_form)
 
-        this_rant = db(db.rant.id == rant_id).select().first()
-        rant_comments = db(db.reply.rant_id == rant_id).select()
-        return dict(rant=this_rant, comments=[comment for comment in rant_comments if rant_comments],
-                    reply_form=reply_form)
+        return dict(rant=this_rant, comments=[comment for comment in rant_comments if rant_comments])
     else:
         raise HTTP(404)
-
-
-
