@@ -1,0 +1,22 @@
+@font-face {
+    font-family: "Fira";
+    src: url("FiraCode-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Fira Bold";
+    src: url("FiraCode-Bold.ttf");
+}
+
+p, li, .tag-sort{
+    font-family: "Fira", sans-serif !important;
+}
+
+h1, h2, h3, h4, h5{
+    font-family: "Fira Bold", sans-serif !important;
+}
+
+.posted-at{
+    font-size: 10px !important;
+    margin-left: 2%;
+}

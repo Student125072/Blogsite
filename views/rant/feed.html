@@ -80,6 +80,7 @@
     .tag-sort a{
         text-decoration: none;
         color: darkgrey;
+        font-size: 14px;
     }
 
     .tag-select:hover{
@@ -114,7 +115,7 @@
                     <a href="{{=URL('user', 'profile', vars={'username':rant.author.username})}}"
                        class="btn-link text-semibold media-heading box-inline">{{=rant.author.username}}</a>
                     <div class="row">
-                        <p class="text-muted text-sm">{{=rant.posted_at}}</p>
+                        <p class="text-muted text-sm posted-at">{{=rant.posted_at}}</p>
                         <p class="tag text-muted">{{=rant.tag}}</p>
                     </div>
                 </div>
