@@ -1,4 +1,5 @@
 import datetime
+from web2py_utils.paginate import Pagination
 
 
 @auth.requires_login()
@@ -43,4 +44,13 @@ def view():
         raise HTTP(404)
 
 
+def feed():
+    query = db.rant.id > 0
+    orderby = ~db.rant.posted_at
+    pcache = (cache.ram, 15)
 
+    paginate = Pagination(db, query, orderby, display_count=10, cache=pcache, r=request, res=response)
+
+    rants = paginate.get_set(set_links=True)
+
+    return dict(rants=rants)

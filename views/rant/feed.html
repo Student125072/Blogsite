@@ -1,0 +1,130 @@
+{{extend 'layout.html'}}
+
+<style>
+
+    .img-sm {
+        width: 46px;
+        height: 46px;
+    }
+
+    .panel {
+        box-shadow: 0 2px 0 rgba(0, 0, 0, 0.075);
+        border-radius: 0;
+        border: 0;
+        margin-bottom: 15px;
+    }
+
+    .panel .panel-footer, .panel > :last-child {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .panel .panel-heading, .panel > :first-child {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    .panel-body {
+        padding: 25px 20px;
+    }
+
+
+    .media-block .media-left {
+        display: block;
+        float: left
+    }
+
+    .media-block .media-right {
+        float: right
+    }
+
+    .media-block .media-body {
+        display: block;
+        overflow: hidden;
+        width: auto
+    }
+
+    .middle .media-left,
+    .middle .media-right,
+    .middle .media-body {
+        vertical-align: middle
+    }
+
+    .text-muted, a.text-muted:hover, a.text-muted:focus {
+        color: #acacac;
+    }
+
+    .text-sm {
+        font-size: 0.9em;
+    }
+
+    .tag {
+        color: blue !important;
+        text-transform: uppercase;
+        font-size: 10px;
+        margin-left: 0.5%;
+    }
+
+    .rant-content a {
+        text-decoration: none;
+        color: black;
+    }
+
+</style>
+
+<div class="row d-flex justify-content-center">
+
+    <div class="col-lg-10">
+
+        <div class="panel">
+        {{for rant in rants:}}
+
+            <div class="panel-body">
+                <div class="media-block">
+                    <a class="media-left" href="{{=URL('user', 'profile', vars={'username':rant.author.username})}}">
+                        <img class="img-circle img-sm rounded-circle" alt="Profile Picture"
+                             src="{{=URL('default', 'download', args=rant.author.profile_picture)}}"
+                             height="100" width="100">
+                    </a>
+                    <div class="media-body">
+                        <div class="mar-btm">
+                            <a href="{{=URL('user', 'profile', vars={'username':rant.author.username})}}"
+                               class="btn-link text-semibold media-heading box-inline">{{=rant.author.username}}</a>
+                            <div class="row">
+                                <p class="text-muted text-sm">{{=rant.posted_at}}</p>
+                                <p class="tag text-muted">{{=rant.tag}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rant-content">
+                        <a href="{{=URL('rant', 'view', vars={'id':rant.id})}}">
+                            <h3>{{=rant.title}}</h3>
+                        {{from shortify import shortify}}
+                            <p>{{=shortify(rant.description)}}</p>
+                        </a>
+                    </div>
+                </div>
+                <hr>
+            </div>
+
+        {{pass}}
+        </div>
+
+    </div>
+</div>
+
+{{def paginate():}}
+{{if response.paginate_links:}}
+<div class="pagination">
+    <div class="paginate_back">
+    {{response.paginate_links[0]}}
+    </div>
+    <div class="paginate_forw">
+    {{=response.paginate_links[1]}}
+    </div>
+    <div class="paginate_loc">
+    {{=response.paginate_links[2]}}
+    </div>
+</div>
+{{pass}}
+{{pass}}
