@@ -1,4 +1,5 @@
 import datetime
+from web2py_utils.paginate import Pagination
 
 
 @auth.requires_login()
@@ -42,3 +43,22 @@ def view():
         return dict(rant=this_rant, comments=[comment for comment in rant_comments if rant_comments])
     else:
         raise HTTP(404)
+
+def feed():
+    query = db.rant.id > 0
+    orderby = ~db.rant.posted_at
+    pcache = (cache.ram, 15)
+    if request.vars['tag']:
+        if request.vars['tag'] == 'Front-end':
+            query = db.rant.tag == 'Front-end'
+        elif request.vars['tag'] == 'Back-end':
+            query = db.rant.tag == 'Back-end'
+        else:
+            raise HTTP(404)
+
+    paginate = Pagination(db, query, orderby, display_count=10, cache=pcache, r=request, res=response)
+
+    rants = paginate.get_set(set_links=True)
+
+    return dict(rants=rants)
+
