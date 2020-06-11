@@ -6,3 +6,4 @@ cache/
 .idea
 errors
 databases/sql.log
+private

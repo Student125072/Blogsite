@@ -44,6 +44,7 @@ def view():
     else:
         raise HTTP(404)
 
+
 def feed():
     query = db.rant.id > 0
     orderby = ~db.rant.posted_at
@@ -61,4 +62,3 @@ def feed():
     rants = paginate.get_set(set_links=True)
 
     return dict(rants=rants)
-
