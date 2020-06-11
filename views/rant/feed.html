@@ -70,45 +70,68 @@
         color: black;
     }
 
+    .tag-select{
+        border: 1px solid lightgrey;
+        border-radius: 10px;
+        padding: 3px;
+        background-color: lightgrey;
+    }
+
+    .tag-sort a{
+        text-decoration: none;
+        color: darkgrey;
+    }
+
+    .tag-select:hover{
+        color: black;
+    }
+
 </style>
 
-<div class="row d-flex justify-content-center">
+<div class="row">
 
-    <div class="col-lg-10">
+    <div class="col-lg-2 align-self-start tag-sort">
+        <h3>Tags</h3>
+        <a href="?tag=Front-end" class="tag-select">Front-end</a>
+        <a href="?tag=Back-end" class="tag-select">Back-end</a>
+        <a href="{{=URL('rant', 'feed')}}" class="tag-select"><i class="fa fa-times"></i></a>
+    </div>
+
+    <div class="col-lg-10 align-self-center">
 
         <div class="panel">
-        {{for rant in rants:}}
+{{for rant in rants:}}
 
-            <div class="panel-body">
-                <div class="media-block">
-                    <a class="media-left" href="{{=URL('user', 'profile', vars={'username':rant.author.username})}}">
-                        <img class="img-circle img-sm rounded-circle" alt="Profile Picture"
-                             src="{{=URL('default', 'download', args=rant.author.profile_picture)}}"
-                             height="100" width="100">
-                    </a>
-                    <div class="media-body">
-                        <div class="mar-btm">
-                            <a href="{{=URL('user', 'profile', vars={'username':rant.author.username})}}"
-                               class="btn-link text-semibold media-heading box-inline">{{=rant.author.username}}</a>
-                            <div class="row">
-                                <p class="text-muted text-sm">{{=rant.posted_at}}</p>
-                                <p class="tag text-muted">{{=rant.tag}}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="rant-content">
-                        <a href="{{=URL('rant', 'view', vars={'id':rant.id})}}">
-                            <h3>{{=rant.title}}</h3>
-                        {{from shortify import shortify}}
-                            <p>{{=shortify(rant.description)}}</p>
-                        </a>
+    <div class="panel-body">
+        <div class="media-block">
+            <a class="media-left" href="{{=URL('user', 'profile', vars={'username':rant.author.username})}}">
+                <img class="img-circle img-sm rounded-circle" alt="Profile Picture"
+                     src="{{=URL('default', 'download', args=rant.author.profile_picture)}}"
+                     height="100" width="100">
+            </a>
+            <div class="media-body">
+                <div class="mar-btm">
+                    <a href="{{=URL('user', 'profile', vars={'username':rant.author.username})}}"
+                       class="btn-link text-semibold media-heading box-inline">{{=rant.author.username}}</a>
+                    <div class="row">
+                        <p class="text-muted text-sm">{{=rant.posted_at}}</p>
+                        <p class="tag text-muted">{{=rant.tag}}</p>
                     </div>
                 </div>
-                <hr>
             </div>
-
-        {{pass}}
+            <div class="rant-content">
+                <a href="{{=URL('rant', 'view', vars={'id':rant.id})}}">
+                    <h3>{{=rant.title}}</h3>
+                {{from shortify import shortify}}
+                    <p>{{=shortify(rant.description)}}</p>
+                </a>
+            </div>
         </div>
+        <hr>
+    </div>
+
+{{pass}}
+</div>
 
     </div>
 </div>

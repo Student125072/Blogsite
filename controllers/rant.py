@@ -48,6 +48,13 @@ def feed():
     query = db.rant.id > 0
     orderby = ~db.rant.posted_at
     pcache = (cache.ram, 15)
+    if request.vars['tag']:
+        if request.vars['tag'] == 'Front-end':
+            query = db.rant.tag == 'Front-end'
+        elif request.vars['tag'] == 'Back-end':
+            query = db.rant.tag == 'Back-end'
+        else:
+            raise HTTP(404)
 
     paginate = Pagination(db, query, orderby, display_count=10, cache=pcache, r=request, res=response)
 
