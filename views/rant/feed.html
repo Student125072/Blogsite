@@ -106,9 +106,11 @@
     <div class="panel-body">
         <div class="media-block">
             <a class="media-left" href="{{=URL('user', 'profile', vars={'username':rant.author.username})}}">
+                {{if rant.author.profile_picture:}}
                 <img class="img-circle img-sm rounded-circle" alt="Profile Picture"
                      src="{{=URL('default', 'download', args=rant.author.profile_picture)}}"
                      height="100" width="100">
+                {{pass}}
             </a>
             <div class="media-body">
                 <div class="mar-btm">
@@ -123,8 +125,7 @@
             <div class="rant-content">
                 <a href="{{=URL('rant', 'view', vars={'id':rant.id})}}">
                     <h3>{{=rant.title}}</h3>
-                {{from shortify import shortify}}
-                    <p>{{=shortify(rant.description)}}</p>
+                    <p>{{=rant.description}}</p>
                 </a>
             </div>
         </div>
