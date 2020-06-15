@@ -84,11 +84,7 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
                    aria-expanded="false">
-                {{if auth.user:}}
-                {{if auth.user.profile_picture:}}
-                    <img class="rounded-circle" height="20" width="20" alt="profile pic" src="{{=URL('default', 'download', args=auth.user.profile_picture)}}">
-                {{pass}}
-                        {{=auth.user.username}}{{else:}}LOGIN{{pass}}
+                {{if auth.user:}}{{=auth.user.username}}{{else:}}LOGIN{{pass}}
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
                 {{if auth.user:}}
