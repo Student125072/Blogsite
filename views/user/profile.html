@@ -112,15 +112,11 @@
           {{if auth.user_id == user.id:}}
           <div class="row">
             <div class="col-md-2">
-              <a href="{{=URL('user', 'profile', vars={
-                        'username' : user.username,
-                        'edit' : True
-                        })}}" class="profile-edit-btn btn">Edit profile</a>
+              <a href="{{=URL('user', 'edit')}}" class="profile-edit-btn btn">Edit profile</a>
             </div>
           </div>
           {{pass}}
         </div>
-        {{if not request.vars['edit']:}}
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item">
             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
@@ -186,9 +182,5 @@
         </div>
       </div>
     </div>
-    {{else:}}
-    {{=edit_profile}}
-    <a class="btn profile-edit-btn" href="{{=URL('user', 'profile', vars={'username': user.username})}}">Don't save changes</a>
-    {{pass}}
   </form>
 </div>
