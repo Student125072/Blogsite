@@ -17,8 +17,17 @@ def login():
     return dict(login=auth.login())
 
 
+def change_password():
+    return dict(change_password=auth.change_password(next=URL('user', 'profile', vars={
+        'username': auth.user.username
+    })))
+
+
+def retrieve_password():
+    return dict(retrieve_password=auth.retrieve_password())
+
+
 def edit():
-    current_username = auth.user.username
     return dict(edit=auth.profile(next=URL('user', 'profile', vars={
-        'username': current_username
+        'username': auth.user.username
     })))
