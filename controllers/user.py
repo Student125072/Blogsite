@@ -6,12 +6,6 @@ def profile():
             posts_count = db(db.rant.author == this_user.id).count()
             posts = db(db.rant.author == this_user.id).select(orderby=~db.rant.posted_at)
 
-            if this_user.id == auth.user_id:
-
-                if request.vars['edit']:
-                    return dict(edit_profile=auth.profile(), user=this_user, posts_count=posts_count)
-                return dict(user=this_user, posts_count=posts_count, posts=posts)
-
             return dict(user=this_user, posts_count=posts_count, posts=posts)
 
 
@@ -21,3 +15,10 @@ def register():
 
 def login():
     return dict(login=auth.login())
+
+
+def edit():
+    current_username = auth.user.username
+    return dict(edit=auth.profile(next=URL('user', 'profile', vars={
+        'username': current_username
+    })))
