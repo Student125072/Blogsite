@@ -13,3 +13,11 @@ def profile():
                 return dict(user=this_user, posts_count=posts_count, posts=posts)
 
             return dict(user=this_user, posts_count=posts_count, posts=posts)
+
+
+def register():
+    return dict(register=auth.register())
+
+
+def login():
+    return dict(login=auth.login())

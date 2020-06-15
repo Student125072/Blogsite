@@ -14,5 +14,3 @@ db.define_table('reply',
                 Field('description', 'text', length=500, requires=IS_NOT_EMPTY()),
                 Field('posted_at', 'datetime', requires=IS_NOT_EMPTY(), writable=False)
                 )
-
-
