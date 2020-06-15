@@ -7,4 +7,3 @@ cache/
 errors
 databases/sql.log
 private
-databases/storage.sqlite
