@@ -82,3 +82,13 @@
     .tag-select:hover{
         color: black;
     }
+
+    .sort-select a{
+        text-decoration: none;
+        font-size: 14px;
+        font-family: "Fira", sans-serif;
+    }
+
+    .sort-select{
+        border: 1px solid grey;
+    }
