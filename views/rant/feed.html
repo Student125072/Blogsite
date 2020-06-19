@@ -1,8 +1,21 @@
 {{extend 'layout.html'}}
 
-<head>
-    <link rel="stylesheet" href="{{=URL('static', 'css/rant.css')}}">
-</head>
+<style>
+    @media (min-width: 922px) {
+        .card {
+            margin-bottom: 2.7rem;
+        }
+    }
+
+    .card-link{
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .card-link:hover{
+        color: inherit;
+    }
+</style>
 
 <div class="row">
 
@@ -13,45 +26,42 @@
         <a href="{{=URL('rant', 'feed')}}" class="tag-select"><i class="fa fa-times"></i></a>
     </div>
 
-    <div class="col-lg-10 align-self-center">
+    <div class="col-sm-12 col-md-8 align-self-center">
 
-        <div class="panel">
-        {{for rant in rants:}}
+        <a class="col-sm-12 col-md-12 btn" style="margin-bottom: 2.7rem" href="{{=URL('rant', 'create')}}">
+            Click here to start ranting!
+        </a>
 
-            <div class="panel-body">
-                <div class="media-block">
-                    <a class="media-left" href="{{=URL('user', 'profile', vars={'username':rant.author.username})}}">
-                    {{if rant.author.profile_picture:}}
-                        <img class="img-circle img-sm rounded-circle" alt="Profile Picture"
-                             src="{{=URL('default', 'download', args=rant.author.profile_picture)}}"
-                             height="100" width="100">
-                    {{pass}}
-                    </a>
-                    <div class="media-body">
-                        <div class="mar-btm">
-                            <a href="{{=URL('user', 'profile', vars={'username':rant.author.username})}}"
-                               class="btn-link text-semibold media-heading box-inline">{{=rant.author.username}}</a>
-                            <div class="row">
-                                <p class="text-muted text-sm posted-at">{{=rant.posted_at.strftime('%d-%m-%Y %H:%M')}}</p>
-                                <p class="tag text-muted">{{=rant.tag}}</p>
+    {{for rant in rants:}}
+        <a class="card-link" href="{{=URL('rant', 'view', vars={'id': rant.id})}}">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="mr-2">
+                                <img class="rounded-circle" height="50" width="50"
+                                     src="{{=URL('default', 'download', args=rant.author.profile_picture)}}" alt="">
+                            </div>
+                            <div class="ml-2">
+                                <div class="h5 m-0">@{{=rant.author.username}}</div>
+                                <div class="h7 text-muted">{{=rant.tag}}</div>
                             </div>
                         </div>
                     </div>
-                    <div class="rant-content">
-                        <a href="{{=URL('rant', 'view', vars={'id':rant.id})}}">
-                            <h3>{{=rant.title}}</h3>
-                            <p>{{=rant.description}}</p>
-                        </a>
-                        <a href="{{=URL('rant', 'view', vars={'id':rant.id})}}#comment">
-                            <span style="color: grey;"><i class="fa fa-comment"></i> {{=rant.reply.count()}}</span>
-                        </a>
-                    </div>
-                </div>
-                <hr>
-            </div>
 
-        {{pass}}
-        </div>
+                </div>
+                <div class="card-body">
+                    <div class="text-muted h7 mb-2"><i
+                            class="fa fa-clock-o"></i>{{=rant.posted_at.strftime('%H:%M %d-%m-%Y')}}</div>
+
+                    <h5 class="card-title">{{=rant.title}}</h5>
+
+                    <p class="card-text">{{=rant.description}}</p>
+                </div>
+            </div>
+        </a>
+    {{pass}}
+
 
     </div>
 </div>
