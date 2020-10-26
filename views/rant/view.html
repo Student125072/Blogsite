@@ -1,4 +1,25 @@
 {{extend 'layout.html'}}
 
-{{=rant}}
-{{=comments}}
+<div class="container">
+    <div class="card">
+        <div class="card-header">{{=rant.title}}</div>
+        <div class="card-title">
+            <img src="{{=URL('default', 'download', args=rant.author.profile_picture)}}" alt="">
+            @{{=rant.author.username}}</div>
+        <div class="card-body">{{=rant.description}}</div>
+    </div>
+
+    {{=reply}}
+    {{for comment in comments:}}
+        <div class="container">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">{{=comment.author.username}}</div>
+                    <div class="card-body">{{=comment.description}}</div>
+                </div>
+            </div>
+        </div>
+    {{pass}}
+</div>
+
+
