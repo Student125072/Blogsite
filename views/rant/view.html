@@ -1,5 +1,36 @@
 {{extend 'layout.html'}}
 
+<style>
+    .reply {
+        background-color: #d9d9d9;
+        margin: 2%;
+    }
+
+    .comment {
+        margin: 10px;
+    }
+
+    .speech-bubble {
+        position: relative;
+        background: #85b6fe;
+        border-radius: .4em;
+    }
+
+    .speech-bubble:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        width: 0;
+        height: 0;
+        border: 9px solid transparent;
+        border-right-color: #85b6fe;
+        border-left: 0;
+        margin-top: -9px;
+        margin-left: -9px;
+    }
+</style>
+
 <div class="container">
     <div class="card">
         <div class="card-header">{{=rant.title}}</div>
@@ -9,17 +40,20 @@
         <div class="card-body">{{=rant.description}}</div>
     </div>
 
-    {{=reply}}
+    <div class="card reply">
+        <div class="card-body text-center">{{=reply}}</div>
+    </div>
+
+    <div class="container">
     {{for comment in comments:}}
-        <div class="container">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">{{=comment.author.username}}</div>
-                    <div class="card-body">{{=comment.description}}</div>
-                </div>
+        <div class="col-md-12">
+            <div class="card comment speech-bubble">
+                <div class="card-header">{{=comment.author.username}}</div>
+                <div class="card-body">{{=comment.description}}</div>
             </div>
         </div>
     {{pass}}
+    </div>
 </div>
 
 

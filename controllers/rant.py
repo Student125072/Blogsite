@@ -1,5 +1,6 @@
 import datetime
 from web2py_utils.paginate import Pagination
+import shortify
 
 
 @auth.requires_login()
@@ -68,6 +69,7 @@ def view():
         rant_id = request.vars['id']
         this_rant = db(db.rant.id == rant_id).select().first()
         rant_comments = db(db.reply.rant_id == rant_id).select()
+        msg = 'Login is required to comment'
 
         if auth.user:
             reply_form = SQLFORM.factory(db.reply)
@@ -80,10 +82,8 @@ def view():
                 )
                 session.flash = 'Comment added!'
                 redirect(URL(f='view', vars={'id': rant_id}))
-            return dict(rant=this_rant, comments=[comment for comment in rant_comments if rant_comments],
-                        reply=reply_form)
 
-        return dict(rant=this_rant, comments=[comment for comment in rant_comments if rant_comments])
+        return dict(rant=this_rant, comments=[comment for comment in rant_comments if rant_comments], reply=reply_form if auth.user else msg)
     else:
         raise HTTP(404)
 
@@ -105,4 +105,4 @@ def feed():
 
     rants = paginate.get_set(set_links=True)
 
-    return dict(rants=rants)
+    return dict(rants=rants, shortify=shortify.shortify)
