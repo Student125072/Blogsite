@@ -9,7 +9,7 @@ db.define_table('rant',
                 )
 
 db.define_table('reply',
-                Field('author', 'reference auth_user', writable=False, default=auth.user_id),
+                Field('author', 'reference auth_user', writable=False, readable=False, default=auth.user_id),
                 Field('rant_id', 'reference rant', writable=False),
                 Field('description', 'text', length=500, requires=IS_NOT_EMPTY()),
                 Field('posted_at', 'datetime', requires=IS_NOT_EMPTY(), writable=False)
